@@ -1,0 +1,27 @@
+@import './base.css';
+@import 'bootstrap';
+:root {
+    --main-color: #00bd7e;
+    --main-color-aplha : #00bd7e33;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-label {
+    z-index: 10;
+    margin: 0px 25px -11px;
+    background-image: linear-gradient(to bottom, white 80%, transparent 20%);
+    width: fit-content;
+    padding: 0px 5px;
+    height: 25px;
+}
+
+.form-control {
+    border: 1px solid #d7d7d7;
+    height: 45px;
+    border-radius: 4px;
+}
+.form-control:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0px 1.5px var(--main-color-aplha);
+}
