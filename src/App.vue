@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
-import { ref, onBeforeMount } from 'vue';
+import { ref } from 'vue';
 import ThrowError from './components/controllers/ThrowError.vue';
 var errorMessage = ref(null);
 

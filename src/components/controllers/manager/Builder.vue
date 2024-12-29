@@ -28,10 +28,10 @@ var checkDuplicateIds = () => {
 
     var duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
     if (duplicateIds.length > 0) {
-        errorMessage.value = `Duplicate id found in Builder: ${duplicateIds.join(', ')}`;
+        errorMessage.value = `Duplicate id found in Builder Id: ${duplicateIds.join(', ')}`;
         return;
     }
-    // getBuilderFields(props.id, ids)
+    getBuilderFields(props.id, ids)
 };
 onMounted(() => {
     checkDuplicateIds();

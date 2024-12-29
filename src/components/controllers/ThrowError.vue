@@ -1,7 +1,7 @@
 <template>
     <div v-if="error" class="error-overlay">
         <div class="container error-container">
-            <h4>The Error Message:</h4>
+            <h4>Error</h4>
             <p v-html="error"></p>
         </div>
     </div>
@@ -16,11 +16,11 @@
 <style scoped>
 .error-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(0, 0, 0, 0.75);
     color: white;
     display: flex;
     justify-content: center;
@@ -28,13 +28,14 @@
     font-size: 20px;
     font-weight: bold;
     z-index: 9999;
+    transform: translate(-50%, -50%);
+    padding: 20px;
 }
 
 .error-overlay .error-container {
     background-color: #af25254f;
-    padding: 20px;
+    padding: 20px 40px;
     border-radius: 8px;
-    margin: 40px 0px;
 }
 .error-overlay .error-container p {
     margin: 0px;

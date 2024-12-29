@@ -15,5 +15,29 @@ $this.getField = (id) => {
     return $this.Field[id];
 };
 $this.getBuilderFields = (key, fields) => {
-    return $this.Fields[key] = {};
+    if(fields.length > 0)
+        $this.Fields[key] = {};
+        fields.forEach(fieldId => {
+            $this.Fields[key][fieldId] = $this.Field[fieldId];
+        });
+    return $this.Fields[key];
+}
+$this.reduceProps = (props, state) => {
+    if (!isEmptyOrNull(props) && !isEmptyOrNull(state)) {
+        return Object.keys(props).reduce((acc, key) => {
+            acc[key] = state[key];
+            return acc;
+        }, {});
+    }
+    return {}; 
+}
+$this.reduceFunctions = (functionObj) => {
+    var functions = {};
+    if(!isEmptyOrNull(functionObj))
+        Object.entries(functionObj).reduce((acc, [name, fn]) => {
+            if (typeof fn === "function")
+                acc[name] = fn;
+            return functions = acc;
+        }, {});
+    return functions;
 }
