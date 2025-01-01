@@ -10,22 +10,22 @@
 import { reactive, onMounted, onUnmounted, toRefs, computed  } from 'vue';
 
     var props = defineProps({
-        id : {type: String, required: true, default: GUID()},
-        type: {type: String, default: 'text'},
-        label: {type: String},
-        hasLabel: {type: Boolean, default: true},
-        defaultValue : {type: [String, Number]},
-        max: {type: Number, default: 999999999999999},
-        min: {type: Number, default: 0},
-        maxlength: {type: Number, default: 999},
-        placeholder : {type: String, default: '' },
+        id : readVal(String, GUID(), true),
+        exportAs: readVal(String, ""),
+        type: readVal(String, "text"),
+        label: readVal(String, ""),
+        hasLabel: readBool(Boolean, true),
+        defaultValue : readVal([String, Number], ""),
+        max: readVal(Number, 999999999999999),
+        min: readVal(Number, 0),
+        maxlength: readVal(Number, 999),
+        placeholder : readVal(String, ""),
     });
     var state = reactive({ ...props });
     var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";
-    var defaultValue = !isEmptyOrNull(state.defaultValue)? state.defaultValue : "";
+    var defaultValue = !isEmpty(state.defaultValue)? state.defaultValue : "";
 
     var plainProps = reduceProps(props, state);
-
     var functionDefinitions = {
         setLabel: (label) => {
             if (isEmpty(label)) return "";
@@ -44,7 +44,6 @@ import { reactive, onMounted, onUnmounted, toRefs, computed  } from 'vue';
             return state.defaultValue || "";
         },
     };
-
     var functions = reduceFunctions(functionDefinitions);
 
     onMounted(() => {

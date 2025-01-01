@@ -9,6 +9,18 @@ $this.isEmptyOrNull = (str) =>  {
         return true;
     return false;
 }
+$this.isFunction = (attr) => {
+    return typeof attr == "function";
+}
+$this.isObject = (attr) => {
+    return typeof attr == "object";
+}
+$this.isString = (attr) => {
+    return typeof attr == "string"
+}
+$this.isNumber = (attr) => {
+    return typeof attr == "number"
+}
 $this.GUID = () => {
    function s4() {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -81,4 +93,23 @@ $this.formatUnits = (value, unit) => {
         else return value.toString();
     }
     return calculatePrecision(value / units[unit]) + unit + "+";
+}
+$this.capitalizeStr = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+$this.tryEval = (scr) => {
+    try { return eval(scr); } catch(e) {};
+}
+$this.readVal = (type, defaultValue, isRequired) => {
+    if(!isFunction(type) && !isObject(type)) throw "type of readVal must be a String or type of object like [String, Number]";
+    if(typeof defaultValue != "undefined" && typeof isRequired != "undefined")
+        return {type: type, default: defaultValue, required: isRequired};
+    if(typeof defaultValue != "undefined")
+        return {type: type, default: defaultValue};
+    return {type: type};
+}
+$this.readBool = (type, defaultValue = false) => {
+    if(!isFunction(type) || (isString(type) && isNumber(type)) ) throw "type of readBool must be a Boolean";
+    return {type: Boolean, default: defaultValue};
+
 }

@@ -20,8 +20,7 @@
     left: 50%;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    color: white;
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -33,8 +32,9 @@
 }
 
 .error-overlay .error-container {
-    background-color: #af25254f;
-    padding: 20px 40px;
+    background-color: rgba(206, 17, 38, 0.1);
+    color: rgb(252, 207, 207);
+    padding: 16px 16px 24px;
     border-radius: 8px;
 }
 .error-overlay .error-container p {

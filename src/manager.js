@@ -1,24 +1,24 @@
 var $this = window;
+var FieldObj = {};
 $this.Fields = {};
-$this.Field = {};
 $this.getBuilderId = () => {
     var builder = document.querySelector('builder');
     return builder ? builder.getAttribute("id") : null;
 }
 $this.registerField = (id, instance) => {
-    $this.Field[id] = instance;
+    return FieldObj[id] = instance;
 };
 $this.unregisterField = (id) => {
-    delete $this.Field[id];
+    return delete FieldObj[id];
 };
 $this.getField = (id) => {
-    return $this.Field[id];
+    return FieldObj[id];
 };
-$this.getBuilderFields = (key, fields) => {
-    if(fields.length > 0)
-        $this.Fields[key] = {};
-        fields.forEach(fieldId => {
-            $this.Fields[key][fieldId] = $this.Field[fieldId];
+$this.getBuilderFields = (key, inputs) => {
+    $this.Fields[key] = {};
+    if(inputs.length > 0)
+        inputs.forEach(id => {
+            $this.Fields[key][id] = FieldObj[id];
         });
     return $this.Fields[key];
 }
