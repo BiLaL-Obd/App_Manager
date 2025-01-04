@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import { ref } from 'vue';
-import ThrowError from './components/controllers/ThrowError.vue';
+import ThrowError from './components/controllers/manager/ThrowError.vue';
 var errorMessage = ref(null);
 
   var checkDuplicateIds = () => {

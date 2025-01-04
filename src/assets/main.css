@@ -21,6 +21,9 @@
     height: 45px;
     border-radius: 4px;
 }
+textarea.form-control {
+    height: auto;
+}
 .form-control:focus {
     border-color: transparent;
     box-shadow: 0 0 0px 1.5px var(--main-color-aplha);

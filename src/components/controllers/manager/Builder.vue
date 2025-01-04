@@ -8,7 +8,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
-import ThrowError from '../../controllers/ThrowError.vue';
+import ThrowError from './ThrowError.vue';
 
 var props = defineProps({
     id: readVal(String, "", true)

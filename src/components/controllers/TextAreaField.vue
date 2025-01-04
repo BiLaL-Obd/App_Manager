@@ -2,7 +2,8 @@
     <div class="row form-group">
         <label class="form-label" :style="labelVisibility">{{ state.label }}</label>
         <div class="col-12">
-            <input :id="id" :type="type" :value="defaultValue" class="form-control" :maxlength="state.maxlength" :max="state.max" :min="state.min" :placeholder="state.placeholder">
+            <textarea :id="id" :rows="state.rows" :value="defaultValue" class="form-control" :maxlength="state.maxlength" :placeholder="state.placeholder">
+            </textarea>
         </div>
     </div>
 </template>
@@ -12,12 +13,10 @@ import { reactive, onMounted, onUnmounted } from 'vue';
     var props = defineProps({
         id : readVal(String, GUID(), true),
         exportAs: readVal(String, ""),
-        type: readVal(String, "text"),
         label: readVal(String, ""),
+        rows: readVal(Number, 3.5),
         hasLabel: readBool(Boolean, true),
         defaultValue : readVal([String, Number], ""),
-        max: readVal(Number, 999999999999999),
-        min: readVal(Number, 0),
         maxlength: readVal(Number, 999),
         placeholder : readVal(String, ""),
     });
@@ -31,23 +30,12 @@ import { reactive, onMounted, onUnmounted } from 'vue';
             if (isEmpty(label)) return "";
             state.label = label;
         },
-        setMax: (value) => {
-            if (value >= state.min) state.max = value;
-        },
-        setMin: (value) => {
-            if (value <= state.max) state.min = value;
-        },
         setPlaceholder: (text) => {
             state.placeholder = text;
         },
         getDefaultValue: () => {
             return state.defaultValue || "";
         },
-        val: (str) => {
-            if(!isEmptyOrNull(str))
-                return document.getElementById(state.id).value = str;
-            return document.getElementById(state.id).value || "";
-        }
     };
     var functions = reduceFunctions(functionDefinitions);
     onMounted(() => {

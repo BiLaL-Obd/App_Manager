@@ -16,8 +16,11 @@ $this.getField = (id) => {
 };
 $this.getBuilderFields = (key, inputs) => {
     $this.Fields[key] = {};
+    $this[key] = {};
     if(inputs.length > 0)
         inputs.forEach(id => {
+            var props = getProps(Fields[id]);
+            $this[key][id] = props;
             Fields[key][id] = Fields[id];
             delete Fields[id];
         });
@@ -32,11 +35,21 @@ $this.reduceProps = (props, state) => {
     }
     return {}; 
 }
-$this.reduceFunctions = (functionObj) => {
+$this.reduceFunctions = (obj) => {
     var functions = {};
-    if(!isEmptyOrNull(functionObj))
-        Object.entries(functionObj).reduce((acc, [name, fn]) => {
+    if(!isEmptyOrNull(obj))
+        Object.entries(obj).reduce((acc, [name, fn]) => {
             if (typeof fn === "function")
+                acc[name] = fn;
+            return functions = acc;
+        }, {});
+    return functions;
+}
+$this.getProps = (obj) => {
+    var functions = {};
+    if(!isEmptyOrNull(obj))
+        Object.entries(obj).reduce((acc, [name, fn]) => {
+            if (typeof fn != "function")
                 acc[name] = fn;
             return functions = acc;
         }, {});
