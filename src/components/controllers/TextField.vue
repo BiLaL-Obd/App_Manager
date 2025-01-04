@@ -7,7 +7,7 @@
     </div>
 </template>
 <script setup> 
-import { reactive, onMounted, onUnmounted, toRefs, computed  } from 'vue';
+import { reactive, onMounted, onUnmounted } from 'vue';
 
     var props = defineProps({
         id : readVal(String, GUID(), true),
@@ -24,7 +24,7 @@ import { reactive, onMounted, onUnmounted, toRefs, computed  } from 'vue';
     var state = reactive({ ...props });
     var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";
     var defaultValue = !isEmpty(state.defaultValue)? state.defaultValue : "";
-
+    
     var plainProps = reduceProps(props, state);
     var functionDefinitions = {
         setLabel: (label) => {
@@ -45,7 +45,6 @@ import { reactive, onMounted, onUnmounted, toRefs, computed  } from 'vue';
         },
     };
     var functions = reduceFunctions(functionDefinitions);
-
     onMounted(() => {
         registerField(props.id, { ...plainProps , ...functions});
     });

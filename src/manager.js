@@ -1,26 +1,27 @@
 var $this = window;
-var FieldObj = {};
-$this.Fields = {};
+var Fields = {};
+$this.Fields = Fields;
 $this.getBuilderId = () => {
     var builder = document.querySelector('builder');
     return builder ? builder.getAttribute("id") : null;
 }
 $this.registerField = (id, instance) => {
-    return FieldObj[id] = instance;
+    return Fields[id] = instance;
 };
 $this.unregisterField = (id) => {
-    return delete FieldObj[id];
+    return delete Fields[id];
 };
 $this.getField = (id) => {
-    return FieldObj[id];
+    return Fields[id];
 };
 $this.getBuilderFields = (key, inputs) => {
     $this.Fields[key] = {};
     if(inputs.length > 0)
         inputs.forEach(id => {
-            $this.Fields[key][id] = FieldObj[id];
+            Fields[key][id] = Fields[id];
+            delete Fields[id];
         });
-    return $this.Fields[key];
+    return Fields[key];
 }
 $this.reduceProps = (props, state) => {
     if (!isEmptyOrNull(props) && !isEmptyOrNull(state)) {

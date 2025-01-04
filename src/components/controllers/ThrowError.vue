@@ -7,9 +7,8 @@
     </div>
 </template>
 <script setup>
-    import { ref} from 'vue';
-    var props = defineProps({
-        error: {type: String}
+    defineProps({
+        error: {type: String, default: ""}
     });
 
 </script>

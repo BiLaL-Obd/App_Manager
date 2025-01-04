@@ -11,14 +11,14 @@ import { ref, onMounted } from 'vue';
 import ThrowError from '../../controllers/ThrowError.vue';
 
 var props = defineProps({
-    id: { type: String, required: true }
+    id: readVal(String, "", true)
 });
 
 var builderTag = 'Builder';
 var errorMessage = ref(null);
 
 var checkDuplicateIds = () => {
-    if(isEmptyOrNull(props.id))
+    if(isEmpty(props.id))
     {
         errorMessage.value = `Please this Builder should be have an ID`;
         return;

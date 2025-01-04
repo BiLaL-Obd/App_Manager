@@ -102,11 +102,13 @@ $this.tryEval = (scr) => {
 }
 $this.readVal = (type, defaultValue, isRequired) => {
     if(!isFunction(type) && !isObject(type)) throw "type of readVal must be a String or type of object like [String, Number]";
-    if(typeof defaultValue != "undefined" && typeof isRequired != "undefined")
-        return {type: type, default: defaultValue, required: isRequired};
-    if(typeof defaultValue != "undefined")
-        return {type: type, default: defaultValue};
-    return {type: type};
+    var prop = { type: type };
+    if (typeof defaultValue !== "undefined")
+        prop.default = defaultValue;
+    
+    if (typeof isRequired !== "undefined") 
+        prop.required = isRequired;
+    return prop;
 }
 $this.readBool = (type, defaultValue = false) => {
     if(!isFunction(type) || (isString(type) && isNumber(type)) ) throw "type of readBool must be a Boolean";
