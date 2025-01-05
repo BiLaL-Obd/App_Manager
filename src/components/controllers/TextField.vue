@@ -2,7 +2,10 @@
     <div class="row form-group">
         <label class="form-label" :style="labelVisibility">{{ state.label }}</label>
         <div class="col-12">
-            <input :id="id" :type="type" :value="defaultValue" class="form-control" :maxlength="state.maxlength" :max="state.max" :min="state.min" :placeholder="state.placeholder">
+            <input :id="id" :type="type" :value="defaultValue" class="form-control" :class="{ mendatory: isValid }" :maxlength="state.maxlength" :max="state.max" :min="state.min" :placeholder="state.placeholder" :required="state.required">
+        </div>
+        <div class="col-12 validation-error-message" v-if="isValid">
+            <span>{{ state.validation }}</span>
         </div>
     </div>
 </template>
@@ -20,6 +23,9 @@ import { reactive, onMounted, onUnmounted } from 'vue';
         min: readVal(Number, 0),
         maxlength: readVal(Number, 999),
         placeholder : readVal(String, ""),
+        required: readBool(Boolean, false),
+        validation: readVal(String, "This field is required"),
+        isValid: readBool(Boolean, false)
     });
     var state = reactive({ ...props });
     var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";

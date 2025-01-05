@@ -15,11 +15,11 @@
     padding: 0px 5px;
     height: 25px;
 }
-
 .form-control {
     border: 1px solid #d7d7d7;
     height: 45px;
     border-radius: 4px;
+    padding: 6px 20px;
 }
 textarea.form-control {
     height: auto;
@@ -27,4 +27,16 @@ textarea.form-control {
 .form-control:focus {
     border-color: transparent;
     box-shadow: 0 0 0px 1.5px var(--main-color-aplha);
+}
+.form-control.mendatory{
+    border: 2px solid #ff000070
+}
+.form-control:focus.mendatory {
+    box-shadow: 0 0 0px 1.5px #ff000025;
+}
+.validation-error-message > span{
+    color: red;
+    padding: 0px 20px;
+    margin-top: -1px;
+    display: block;
 }

@@ -85,7 +85,7 @@ $this.formatUnits = (value, unit) => {
             ? Math.floor(formattedValue)
             : formattedValue.toFixed(precision)
     }
-    if(unit.toLowecase() == "auto")
+    if(unit.toLowercase() == "auto")
     {
         if(value >= units.B) return calculatePrecision(value / units.B) + 'B+';
         else if(value >= units.M) return calculatePrecision(value / units.M) + 'M+';

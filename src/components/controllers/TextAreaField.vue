@@ -5,6 +5,9 @@
             <textarea :id="id" :rows="state.rows" :value="defaultValue" class="form-control" :maxlength="state.maxlength" :placeholder="state.placeholder">
             </textarea>
         </div>
+        <div class="col-12 validation-error-message" v-if="isValid">
+            <span>{{ state.validation }}</span>
+        </div>
     </div>
 </template>
 <script setup> 
@@ -19,6 +22,8 @@ import { reactive, onMounted, onUnmounted } from 'vue';
         defaultValue : readVal([String, Number], ""),
         maxlength: readVal(Number, 999),
         placeholder : readVal(String, ""),
+        validation: readVal(String, "This field is required"),
+        isValid: readBool(Boolean, false)
     });
     var state = reactive({ ...props });
     var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";
@@ -36,6 +41,10 @@ import { reactive, onMounted, onUnmounted } from 'vue';
         getDefaultValue: () => {
             return state.defaultValue || "";
         },
+        setRows: (rows) => {
+            if(typeof rows != "number") return state.rows;
+            return state.rows = rows
+        }
     };
     var functions = reduceFunctions(functionDefinitions);
     onMounted(() => {

@@ -3,8 +3,8 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import * as utils from './utils.js'
-import * as manager from './manager.js'
+import './utils.js'
+import './manager.js'
 
 const app = createApp(App)
 // app.config.globalProperties.$utils = utils;

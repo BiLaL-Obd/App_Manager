@@ -1,8 +1,7 @@
 <template>
-    <TextField type="number" v-bind="state" />
+    <TextField type="number" :id="id" :label="label" :value="defaultValue" :max="max" :min="min" :hasLabel="hasLabel" :placeholder="placeholder" :validation="validation" :isValid="isValid" />
 </template>
 <script setup>
-import { reactive} from 'vue';
 import TextField from '../controllers/TextField.vue'
     var props = defineProps({
         id : readVal(String, GUID(), true),
@@ -13,6 +12,7 @@ import TextField from '../controllers/TextField.vue'
         max: readVal(Number, 999999999999999),
         min: readVal(Number, 0),    
         placeholder : readVal(String, ""),
+        validation: readVal(String, "This field is required"),
+        isValid: readBool(Boolean, false)
     });
-var state = reactive({ ...props });
 </script>
