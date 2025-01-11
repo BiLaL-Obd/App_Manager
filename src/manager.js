@@ -57,7 +57,7 @@ $this.getProps = (obj) => {
 }
 var Throw = {
     messages: [],
-    Show: function(message) {
+    Error: function(message) {
         if(isEmptyOrNull(message)) throw "Put the message error";
         this.messages.push(message);
 
