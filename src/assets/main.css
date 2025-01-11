@@ -34,9 +34,16 @@ textarea.form-control {
 .form-control:focus.mendatory {
     box-shadow: 0 0 0px 1.5px #ff000025;
 }
-.validation-error-message > span{
-    color: red;
-    padding: 0px 20px;
-    margin-top: -1px;
-    display: block;
+#toaster-error {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+    z-index: 9999;
 }

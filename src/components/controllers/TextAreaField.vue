@@ -38,6 +38,9 @@ import { reactive, onMounted, onUnmounted } from 'vue';
         setPlaceholder: (text) => {
             state.placeholder = text;
         },
+        removePlaceholder: () => {
+            state.placeholder = '';
+        },
         getDefaultValue: () => {
             return state.defaultValue || "";
         },

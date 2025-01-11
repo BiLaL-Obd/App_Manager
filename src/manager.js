@@ -55,3 +55,28 @@ $this.getProps = (obj) => {
         }, {});
     return functions;
 }
+var Throw = {
+    messages: [],
+    Show: function(message) {
+        if(isEmptyOrNull(message)) throw "Put the message error";
+        this.messages.push(message);
+
+        var alertDiv = document.createElement('div');
+        var style = 'background-color: rgba(206, 17, 38, 0.1);color: rgb(252, 207, 207);padding: 16px 16px 24px;border-radius: 8px;margin-bottom:10px;'
+        var html = '<div style="' + style + '">'
+        html += '<h4>Error</h4>'
+        html += message
+        html += '</div>'
+
+        alertDiv.innerHTML = html;
+        document.getElementById('toaster-error-message').appendChild(alertDiv);
+        document.getElementById('toaster-error').style.display = 'block';
+    },
+
+    Clear: function() {
+        this.messages = [];
+        document.getElementById('toaster-error-message').innerHTML = '';
+        document.getElementById('toaster-error').style.display = 'none';
+    }
+};
+$this.Throw = Throw;

@@ -19,9 +19,9 @@ import { reactive, onMounted, onUnmounted } from 'vue';
         label: readVal(String, ""),
         hasLabel: readBool(Boolean, true),
         defaultValue : readVal([String, Number], ""),
-        max: readVal(Number, 999999999999999),
-        min: readVal(Number, 0),
-        maxlength: readVal(Number, 999),
+        max: readVal(String, "999999999999999"),
+        min: readVal(String, "0"),
+        maxlength: readVal(String, "999"),
         placeholder : readVal(String, ""),
         required: readBool(Boolean, false),
         validation: readVal(String, "This field is required"),
@@ -45,6 +45,9 @@ import { reactive, onMounted, onUnmounted } from 'vue';
         },
         setPlaceholder: (text) => {
             state.placeholder = text;
+        },
+        removePlaceholder: () => {
+            state.placeholder = '';
         },
         getDefaultValue: () => {
             return state.defaultValue || "";
