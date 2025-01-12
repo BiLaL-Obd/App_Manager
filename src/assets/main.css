@@ -9,7 +9,7 @@
 }
 .form-label {
     z-index: 10;
-    margin: 0px 25px -11px;
+    margin: 0px 20px -11px;
     background-image: linear-gradient(to bottom, white 80%, transparent 20%);
     width: fit-content;
     padding: 0px 5px;

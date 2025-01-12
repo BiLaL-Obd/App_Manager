@@ -17,7 +17,7 @@ var builderTag = 'Builder';
 var checkDuplicateIds = () => {
     if(isEmpty(props.id))
     {
-        Throw.Error(`Please this Builder should be have an ID`);
+        Throw.error(`Please this Builder should be have an ID`, 'Builder');
         return;
     }
     var slotChildren = document.querySelectorAll(`builder [id]`);
@@ -25,7 +25,7 @@ var checkDuplicateIds = () => {
 
     var duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
     if (duplicateIds.length > 0) {
-        Throw.Error(`Duplicate id found in Builder Id: ${duplicateIds.join(', ')}`);
+        Throw.error(`Duplicate id found in Builder Id: ${duplicateIds.join(', ')}`, 'Builder');
         return;
     }
     getBuilderFields(props.id, ids)

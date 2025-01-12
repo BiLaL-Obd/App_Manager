@@ -1,5 +1,5 @@
 <template>
-    <TextField type="number" :id="id" :label="label" :value="defaultValue" :max="max" :min="min" :hasLabel="hasLabel" :placeholder="placeholder" :validation="validation" :isValid="isValid" />
+    <TextField type="number" :id="id" :label="label" :value="defaultValue" :max="max" :min="min" :hasLabel="hasLabel" :placeholder="placeholder" :validation="validation" :isValid="isValid"/>
 </template>
 <script setup>
 import TextField from '../controllers/TextField.vue'
@@ -48,6 +48,14 @@ var functions = reduceFunctions(functionDefinitions);
 
 onMounted(() => {
     registerField(props.id, { ...plainProps, ...functions });
+    var bindingKey = document.getElementById(props.id);
+    bindingKey.addEventListener('input', () => {
+        var value = parseInt((bindingKey.value || 0));
+        var min = parseInt(props.min);
+        var max = parseInt(props.max);
+
+        bindingKey.value = Math.max(min, Math.min(max, value));
+    });
 });
 
 onUnmounted(() => {
