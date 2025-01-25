@@ -16,18 +16,15 @@ var builderTag = 'Builder';
 
 var checkDuplicateIds = () => {
     if(isEmpty(props.id))
-    {
         Throw.error(`Please this Builder should be have an ID`, 'Builder');
-        return;
-    }
+
     var slotChildren = document.querySelectorAll(`builder [id]`);
     var ids = Array.from(slotChildren).map((el) => el.id);
 
     var duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
-    if (duplicateIds.length > 0) {
+    if (duplicateIds.length > 0) 
         Throw.error(`Duplicate id found in Builder Id: ${duplicateIds.join(', ')}`, 'Builder');
-        return;
-    }
+    
     Fields[props.id] = {};
     getBuilderFields(props.id, ids)
 };

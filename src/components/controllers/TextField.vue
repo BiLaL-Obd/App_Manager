@@ -34,7 +34,7 @@ var props = defineProps({
 var state = reactive({ ...props });
 var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";
 var builderId = {};
-var checkInterval = null; 
+// var checkInterval = null; 
 
 var plainProps = reduceProps(props, state);
 var updateState = (key, value) => {
@@ -106,12 +106,12 @@ var checkWindowValue = () => {
 
 onMounted(() => {
     builderId = getBuilderId();
-    window[builderId][state.id] = state.defaultValue;
+    updateWindowValue(builderId, state.id, state.defaultValue, checkWindowValue);
     registerField(props.id, { ...plainProps , ...functions});
-    checkInterval = setInterval(checkWindowValue, 100);
+    // checkInterval = setInterval(checkWindowValue, 100);
 });
 onUnmounted(() => {
-    clearInterval(checkInterval); 
-    unregisterField(props.id);
+    // clearInterval(checkInterval); 
+    unregisterField(builderId, props.id);
 });
 </script>

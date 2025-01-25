@@ -5,11 +5,32 @@ $this.getBuilderId = () => {
     var builder = document.querySelector('builder');
     return builder ? builder.getAttribute("id") : null;
 }
+$this.updateWindowValue = (builderId, id, bindingVal, callBack) => {
+    var currBuilderId = getBuilderId();
+    if(builderId != currBuilderId) Throw.error("Please check your builder Id not exist");
+    if(isEmptyOrNull(id) || isEmptyOrNull(callBack)) return;
+    if(!isFunction(callBack)) Throw.error("Please put the good callBack function when using the function \"updateWindowValue(builderId, id, defaultValue, callBackFunc)\"");
+    if (!$this[builderId])
+        $this[builderId] = {};
 
+    $this[builderId] = new Proxy($this[builderId], {
+        set(target, property, value) {
+            if (property === id) {
+                target[property] = value;
+                callBack();
+                return true;
+            }
+            target[property] = value;
+            return true;
+        }
+    });
+    $this[builderId][id] = bindingVal;
+}
 $this.registerField = (id, instance) => {
     retFields[id] = instance;
 };
-$this.unregisterField = (id) => {
+$this.unregisterField = (builderId, id) => {
+    delete $this[builderId];
     delete retFields[id];
 };
 $this.getField = (id) => {
@@ -67,6 +88,7 @@ var Throw = {
         alertDiv.innerHTML = html;
         document.getElementById('toaster-error-message').appendChild(alertDiv);
         document.getElementById('toaster-error').style.display = 'block';
+        return;
     },
     clear: function() {
         this.messages = [];

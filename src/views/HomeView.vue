@@ -17,10 +17,9 @@ var isValid = reactive({});
 var validateField = (key) => {
   isValid[key] = true;
   var field = Fields.testing[key];
-  if (!field) {
+  if (!field) 
     Throw.error(`Field ${key} not found in Fields`);
-    return;
-  }
+
   isValid[key] = isEmptyOrNull(field) ? true : !isEmpty(field.val());
 };
 var validateAllFields = () => {
