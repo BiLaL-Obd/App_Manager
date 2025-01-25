@@ -1,8 +1,14 @@
 @import './base.css';
 @import 'bootstrap';
 :root {
-    --main-color: #00bd7e;
-    --main-color-aplha : #00bd7e33;
+    --main-color: #299f69;
+    --hover-color: #89deb7;
+    --background-color: #42b983;
+    --background-hover: #9ca3af0d;
+    --opacity: .65;
+    --main-color-aplha : #bceef2;
+    --input-color: #2c3e50;
+    --border-color: #bcf7dc;
 }
 .form-group {
     margin-bottom: 15px;
@@ -16,23 +22,42 @@
     height: 25px;
 }
 .form-control {
-    border: 1px solid #d7d7d7;
+    border: 1px solid var(--border-color);
     height: 45px;
     border-radius: 4px;
     padding: 6px 20px;
+    outline: none;
 }
 textarea.form-control {
     height: auto;
 }
+.input-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--background-color);
+    transition: width 0.4s ease, left 0.4s ease;
+}
 .form-control:focus {
-    border-color: transparent;
-    box-shadow: 0 0 0px 1.5px var(--main-color-aplha);
+    border-color: var(--border-color);
+    box-shadow: none;
+}
+.form-control:focus + .input-border {
+    width: 100%;
+    left: 0;
 }
 .form-control.mendatory{
-    border: 2px solid #ff000070
+    border-left: 3px solid #ff0000;
 }
-.form-control:focus.mendatory {
-    box-shadow: 0 0 0px 1.5px #ff000025;
+.form-control.mendatory-not-valid {
+    border: 3px solid #ff0000;
+}
+.validation-error-message > span {
+    margin: 0px 12px;
+    color: red;
+    font-weight: 500;
 }
 #toaster-error {
     position: fixed;

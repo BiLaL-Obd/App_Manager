@@ -16,7 +16,8 @@ var props = defineProps({
     maxlength: readVal(String, "999"),
     placeholder : readVal(String, ""),
     validation: readVal(String, "This field is required"),
-    isValid: readBool(Boolean, false)
+    isValid: readBool(Boolean, true),
+    hasStar: readBool(Boolean, false),
 });
 var state = reactive({ ...props });
 var plainProps = reduceProps(props, state);

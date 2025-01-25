@@ -1,0 +1,10 @@
+@import './base.css';
+@import 'bootstrap';
+:root {
+    --main-color: #121212;
+    --hover-color: #42b983;
+    --background-color: #121212;
+    --background-hover: #9ca3af0d;
+    --opacity: .65;
+    --main-color-aplha : #bceef2;
+}

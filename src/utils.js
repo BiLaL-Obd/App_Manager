@@ -115,3 +115,6 @@ $this.readBool = (type, defaultValue = false) => {
     return {type: Boolean, default: defaultValue};
 
 }
+$this.getFunction = (type) => {
+    return {type: [Function, String]}
+}

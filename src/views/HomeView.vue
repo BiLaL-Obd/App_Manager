@@ -1,34 +1,29 @@
 <template>
   <Builder id="testing">
-        <TextField id="test" :hasLabel="false" label="Testing Field" validation="this is required" :isValid="isValid.test"/>
+        <TextField id="test" :hasLabel="false" label="Testing Field" hasStar validation="this is required" :isValid="isValid.test"/>
         <NumberField id="test2" label="Testing Field 2" max="2" validation="this is required" :isValid="isValid.test2"/>
         <TextAreaField id="test3" label="Testing Field 2"/>
+        <Button text="click" :onclick="validateAllFields" />
   </Builder>
 </template>
 <script setup>
-import { reactive, onMounted } from 'vue';
+import { reactive } from 'vue';
 import Builder from '../components/controllers/manager/Builder.vue';
-import { TextField, NumberField, TextAreaField } from '../components/controllers';
+import { TextField, NumberField, TextAreaField, Button } from '../components/controllers';
 
-var isValid = reactive({
-  test: false,
-  test2: false,
-  test3: false,
-});
-var fieldIds = ['test', 'test2', 'test3'];
+var fieldIds = ['test', 'test2'];
+var isValid = reactive({});
+
 var validateField = (key) => {
-  if (!window.Fields || !window.Fields.testing || !window.Fields.testing[key]) {
-    console.warn(`Field ${key} not found in window.Fields`);
+  isValid[key] = true;
+  var field = Fields.testing[key];
+  if (!field) {
+    Throw.error(`Field ${key} not found in Fields`);
     return;
   }
-  if(!isEmptyOrNull(Fields.testing[key].val))
-    isValid[key] = !isEmpty(window.Fields.testing[key].val());
+  isValid[key] = isEmptyOrNull(field) ? true : !isEmpty(field.val());
 };
 var validateAllFields = () => {
-  fieldIds.forEach((id) => validateField(id));
+  fieldIds.forEach((id) => validateField(id))
 };
-
-onMounted(() => {
-  validateAllFields();
-});
 </script>

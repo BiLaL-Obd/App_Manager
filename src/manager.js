@@ -16,7 +16,6 @@ $this.getField = (id) => {
     return retFields[id];
 };
 $this.getBuilderFields = (key, inputs) => {
-    $this.Fields[key] = {};
     if(inputs.length > 0)
         inputs.forEach(id => {
             Fields[key][id] = retFields[id];
