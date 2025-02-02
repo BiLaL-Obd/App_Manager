@@ -17,20 +17,20 @@
 import { reactive, onMounted, onUnmounted, watch, computed } from 'vue';
 
 var props = defineProps({
-    id : readVal(String, GUID(), true),
-    exportAs: readVal(String, ""),
-    type: readVal(String, "text"),
-    label: readVal(String, ""),
-    hasLabel: readBool(Boolean, true),
-    defaultValue : readVal([String, Number], ""),
-    max: readVal(String, "999999999999999"),
-    min: readVal(String, "0"),
-    maxlength: readVal(String, "999"),
-    placeholder : readVal(String, ""),
-    required: readBool(Boolean, false),
-    validation: readVal(String, "This field is required"),
-    isValid: readBool(Boolean, true),
-    hasStar: readBool(Boolean, false),
+    id : readVal(GUID(), true),
+    exportAs: readVal(""),
+    type: readVal("text"),
+    label: readVal(""),
+    hasLabel: readBool(true),
+    defaultValue : readVal("", false, [String, Number]),
+    max: readVal("999999999999999"),
+    min: readVal("0"),
+    maxlength: readVal("999"),
+    placeholder : readVal(""),
+    required: readBool(false),
+    validation: readVal("This field is required"),
+    isValid: readBool(true),
+    hasStar: readBool(false),
 });
 var state = reactive({ ...props });
 var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";

@@ -9,11 +9,10 @@
 import { onMounted } from 'vue';
 
 var props = defineProps({
-    id: readVal(String, "", true)
+    id: readVal("", true)
 });
 
 var builderTag = 'Builder';
-
 var checkDuplicateIds = () => {
     if(isEmpty(props.id))
         Throw.error(`Please this Builder should be have an ID`, 'Builder');

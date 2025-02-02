@@ -18,18 +18,18 @@
 import { reactive, onMounted, onUnmounted, watch, computed } from 'vue';
 
 var props = defineProps({
-    id : readVal(String, GUID(), true),
-    exportAs: readVal(String, ""),
-    label: readVal(String, ""),
-    rows: readVal(Number, 3.5),
-    hasLabel: readBool(Boolean, true),
-    defaultValue : readVal([String, Number], ""),
-    maxlength: readVal(Number, 999),
-    placeholder : readVal(String, ""),
-    required: readBool(Boolean, false),
-    validation: readVal(String, "This field is required"),
-    isValid: readBool(Boolean, true),
-    hasStar: readBool(Boolean, false),
+    id : readVal(GUID(), true),
+    exportAs: readVal(""),
+    label: readVal(""),
+    rows: readVal(3.5, false, Number),
+    hasLabel: readBool(true),
+    defaultValue : readVal("", false, [String, Number]),
+    maxlength: readVal("999"),
+    placeholder : readVal(""),
+    required: readBool(false),
+    validation: readVal("This field is required"),
+    isValid: readBool(true),
+    hasStar: readBool(false),
 });
 var state = reactive({ ...props });
 var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";

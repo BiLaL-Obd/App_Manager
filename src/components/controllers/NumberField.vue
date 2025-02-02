@@ -7,18 +7,18 @@ import TextField from '../controllers/TextField.vue'
 import { reactive, onMounted, onUnmounted } from 'vue';
 
 var props = defineProps({
-    id : readVal(String, GUID(), true),
-    exportAs: readVal(String, ""),
-    label: readVal(String, ""),
-    hasLabel: readBool(Boolean, true),
-    defaultValue : readVal([String, Number], ""),
-    max: readVal(String, "999999999999999"),
-    min: readVal(String, "0"),    
-    maxlength: readVal(String, "999"),
-    placeholder : readVal(String, ""),
-    validation: readVal(String, "This field is required"),
-    isValid: readBool(Boolean, true),
-    hasStar: readBool(Boolean, false),
+    id : readVal(GUID(), true),
+    exportAs: readVal(""),
+    label: readVal(""),
+    hasLabel: readBool(true),
+    defaultValue : readVal("", false, [String, Number]),
+    max: readVal("999999999999999"),
+    min: readVal("0"),    
+    maxlength: readVal("999"),
+    placeholder : readVal(""),
+    validation: readVal("This field is required"),
+    isValid: readBool(true),
+    hasStar: readBool(false),
 });
 var state = reactive({ ...props });
 var plainProps = reduceProps(props, state);

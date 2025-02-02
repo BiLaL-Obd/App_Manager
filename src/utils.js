@@ -100,7 +100,7 @@ $this.capitalizeStr = (str) => {
 $this.tryEval = (scr) => {
     try { return eval(scr); } catch(e) {};
 }
-$this.readVal = (type, defaultValue, isRequired) => {
+$this.readVal = (defaultValue, isRequired, type = String) => {
     if(!isFunction(type) && !isObject(type)) throw "type of readVal must be a String or type of object like [String, Number]";
     var prop = { type: type };
     if (typeof defaultValue !== "undefined")
@@ -110,11 +110,26 @@ $this.readVal = (type, defaultValue, isRequired) => {
         prop.required = isRequired;
     return prop;
 }
-$this.readBool = (type, defaultValue = false) => {
-    if(!isFunction(type) || (isString(type) && isNumber(type)) ) throw "type of readBool must be a Boolean";
+$this.readBool = (defaultValue = false) => {
     return {type: Boolean, default: defaultValue};
-
 }
-$this.getFunction = (type) => {
+$this.getFunction = () => {
     return {type: [Function, String]}
+}
+$this.getIcon = (icon) => {
+    if (!icon) return [];
+    var cleanIcon = icon.replace('fa-', ''); 
+
+    if (cleanIcon.includes(' ')) {
+        var parts = cleanIcon.split(" ");
+        var prefixMap = {
+            'fa-brands': 'fab',
+            'fa-solid': 'fas',
+            'fa-regular': 'far'
+        };
+        var prefix = prefixMap[parts[0]] || parts[0];
+        var iconName = parts[1] || '';
+        return [prefix, iconName]; 
+    }
+    return cleanIcon;
 }
