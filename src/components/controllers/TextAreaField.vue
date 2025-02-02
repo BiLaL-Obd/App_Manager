@@ -3,9 +3,10 @@
         <label class="form-label" :style="labelVisibility">{{ state.label }}</label>
         <div class="col-12">
             <div class="input-container" style="position:relative;">
-                <textarea :id="id" :rows="state.rows" :value="defaultValue" class="form-control" :maxlength="state.maxlength" :placeholder="state.placeholder">
+                <textarea :id="id" :rows="state.rows" v-model="inputValue" class="form-control" :class="{ 'mendatory': (state.hasStar || state.required), 'mendatory-not-valid': !state.isValid }" 
+                 :maxlength="state.maxlength" :placeholder="state.placeholder">
                 </textarea>
-                <span class="input-border"></span>
+                <span class="input-border" v-show="state.isValid"></span>
             </div>
         </div>
         <div class="col-12 validation-error-message" v-show="!state.isValid">
@@ -14,7 +15,7 @@
     </div>
 </template>
 <script setup> 
-import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { reactive, onMounted, onUnmounted, watch, computed } from 'vue';
 
 var props = defineProps({
     id : readVal(String, GUID(), true),
@@ -25,21 +26,28 @@ var props = defineProps({
     defaultValue : readVal([String, Number], ""),
     maxlength: readVal(Number, 999),
     placeholder : readVal(String, ""),
+    required: readBool(Boolean, false),
     validation: readVal(String, "This field is required"),
-    isValid: readBool(Boolean, true)
+    isValid: readBool(Boolean, true),
+    hasStar: readBool(Boolean, false),
 });
 var state = reactive({ ...props });
 var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";
-var thisVal = ref(null);
+var builderId = {};
 
 var plainProps = reduceProps(props, state);
+var updateState = (key, value) => {
+    state[key] = value;
+    updateFieldRegistration();
+};
+
 var functionDefinitions = {
     setLabel: (label) => {
         if (isEmpty(label)) return "";
-        state.label = label;
+        updateState('label', label);
     },
     setPlaceholder: (text) => {
-        state.placeholder = text;
+        updateState('placeholder', text);
     },
     getDefaultValue: () => {
         return state.defaultValue || "";
@@ -49,20 +57,56 @@ var functionDefinitions = {
         return state.rows = rows
     },
     val: (str) => {
-        if (!thisVal.value) return state.defaultValue;
-        if (!isEmptyOrNull(str)) {
-            thisVal.value.value = str;
-            state.defaultValue = str; 
-        }
-        return thisVal.value.value || state.defaultValue;
+        if (!isEmptyOrNull(str))
+            inputValue.value = str;
+        return state.defaultValue;
+    },
+    showStar: () => {
+        updateState('hasStar', true);
+    },
+    hideStar: () => {
+        updateState('hasStar', false);
     }
 };
 var functions = reduceFunctions(functionDefinitions);
+
+var updateFieldRegistration = () => {
+    if(!isEmptyOrNull(state.defaultValue))
+        state.isValid = true;
+    state.defaultValue = window[builderId][state.id];
+    var plainProps = reduceProps(props, state);
+    registerField(props.id, { ...plainProps, ...functions });
+    getBuilderFields(builderId, [props.id]);
+};
+
+var inputValue = computed({
+    get: () => state.defaultValue,
+    set: (value) => {
+        state.defaultValue = value;
+        window[builderId][state.id] = value;
+        updateFieldRegistration();
+    }
+});
+
+watch(props, (newProps) => {
+    Object.assign(state, newProps);
+});
+watch(state, () => {
+    updateFieldRegistration();
+}, { deep: true });
+
+var checkWindowValue = () => {
+    var windowValue = window[builderId][state.id];
+    if (windowValue !== state.defaultValue)
+        inputValue.value = windowValue;
+};
+
 onMounted(() => {
-    thisVal.value = document.getElementById(state.id);
+    builderId = getBuilderId();
+    updateWindowValue(builderId, state.id, state.defaultValue, checkWindowValue);
     registerField(props.id, { ...plainProps , ...functions});
 });
 onUnmounted(() => {
-    unregisterField(props.id);
+    unregisterField(builderId, props.id);
 });
 </script>

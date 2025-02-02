@@ -1,0 +1,58 @@
+<!-- T-shirt sizes -->
+<fa :icon="['fas', 'coffee']" size="xs"  />
+<fa :icon="['fas', 'coffee']" size="lg"  />
+
+<!-- X-factor sizing -->
+<fa :icon="['fas', 'coffee']" size="7x"  />
+
+<!-- fixed width -->
+<fa :icon="['fas', 'coffee']" fixed-width  />
+
+<!-- Rotate -->
+<fa :icon="['fas', 'coffee']" rotation="90" />
+<fa :icon="['fas', 'coffee']" rotation="180" />
+<fa :icon="['fas', 'coffee']" rotation="270" />
+
+<!-- Mirror -->
+<fa :icon="['fas', 'coffee']" flip="horizontal" />
+<fa :icon="['fas', 'coffee']" flip="vertical" />
+<fa :icon="['fas', 'coffee']" flip="both" />
+
+<!-- animation -->
+<fa :icon="['fas', 'heart']" beat />
+<fa :icon="['fas', 'circle-info']" beat-fade />
+<fa :icon="['fas', 'basketball']" bounce />
+<fa :icon="['fas', 'triangle-exclamation']" fade />
+<fa :icon="['fas', 'compact-disc']" flip />
+<fa :icon="['fas', 'bell']" shake />
+<fa :icon="['fas', 'cog']" spin />
+<fa :icon="['fas', 'compass']" spin spin-reverse />
+<fa :icon="['fas', 'spinner']" spin-pulse />
+
+<!-- border -->
+<fa :icon="['fas', 'coffee']" border />
+
+<!-- position -->
+<fa :icon="['fas', 'coffee']" pull="left" />
+<fa :icon="['fas', 'coffee']" pull="right" />
+
+<!-- transform -->
+<fa :icon="['fas', 'coffee']" :transform="{ rotate: 42 }" />
+
+<fa :icon="['fad', 'coffee-pot']" swap-opacity />
+
+<!-- layer and text  -->
+<fa-layers class="fa-lg">
+    <fa :icon="['fas', 'circle']" />
+    <fa :icon="['fas', 'check']" transform="shrink-6" :style="{ color: 'white' }" />
+</fa-layers>
+
+<fa-layers full-width class="fa-4x">
+    <fa :icon="['fas', 'badge']"/>
+    <fa-text class="gray8" transform="down-2 shrink-8" value="New!" />
+</fa-layers>
+
+<fa-layers full-width class="fa-4x">
+    <fa :icon="['fas', 'envelope']"/>
+    <fa-text counter value="1" position="top-right" />
+</fa-layers>

@@ -3,7 +3,8 @@
         <label class="form-label" :style="labelVisibility">{{ state.label }}</label>
         <div class="col-12">
             <div class="input-container" style="position:relative;">
-                <input :id="id" :type="type" v-model="inputValue" autocomplete="off" class="form-control" :class="{ 'mendatory': (state.hasStar || state.required), 'mendatory-not-valid': !state.isValid }" :maxlength="state.maxlength" :max="state.max" :min="state.min" :placeholder="state.placeholder" :required="state.required">
+                <input :id="id" :type="type" v-model="inputValue" autocomplete="off" class="form-control" :class="{ 'mendatory': (state.hasStar || state.required), 'mendatory-not-valid': !state.isValid }" 
+                :maxlength="state.maxlength" :max="state.max" :min="state.min" :placeholder="state.placeholder" :required="state.required">
                 <span class="input-border" v-show="state.isValid"></span>
             </div>
         </div>
@@ -75,6 +76,7 @@ var functions = reduceFunctions(functionDefinitions);
 var updateFieldRegistration = () => {
     if(!isEmptyOrNull(state.defaultValue))
         state.isValid = true;
+    state.defaultValue = window[builderId][state.id];
     var plainProps = reduceProps(props, state);
     registerField(props.id, { ...plainProps, ...functions });
     getBuilderFields(builderId, [props.id]);
@@ -91,7 +93,6 @@ var inputValue = computed({
 
 watch(props, (newProps) => {
     Object.assign(state, newProps);
-    // updateFieldRegistration();
 });
 
 watch(state, () => {

@@ -1,5 +1,6 @@
 <template>
-    <TextField type="number" :id="id" :label="label" :value="defaultValue" :max="max" :min="min" :hasLabel="hasLabel" :placeholder="placeholder" :validation="validation" :isValid="isValid"/>
+    <TextField type="number" :id="id" :label="label" :value="defaultValue" :max="max" :min="min" :hasStar="hasStar"
+    :hasLabel="hasLabel" :placeholder="placeholder" :validation="validation" :isValid="isValid"/>
 </template>
 <script setup>
 import TextField from '../controllers/TextField.vue'
@@ -21,17 +22,15 @@ var props = defineProps({
 });
 var state = reactive({ ...props });
 var plainProps = reduceProps(props, state);
+var builderId = {};
 
 var functionDefinitions = {
     ...reduceFunctions({
-        val: (str) => {
-            if (!isEmptyOrNull(str)) {
-                var value = parseFloat(str);
-                if (value >= state.min && value <= state.max) {
-                    document.getElementById(state.id).value = value;
-                }
-            }
-            return parseFloat(document.getElementById(state.id).value) || "";
+        val: (nbr) => {
+            nbr = +nbr;
+            if(!isNumber(nbr)) throw "this must be contain number";
+            var value = parseFloat(nbr);
+            window[builderId][state.id] = Math.max(state.min, Math.min(state.max, value))
         }
     }),
     setMax: (value) => {
@@ -48,6 +47,7 @@ var functionDefinitions = {
 var functions = reduceFunctions(functionDefinitions);
 
 onMounted(() => {
+    builderId = getBuilderId();
     registerField(props.id, { ...plainProps, ...functions });
     var bindingKey = document.getElementById(props.id);
     bindingKey.addEventListener('input', () => {
@@ -55,7 +55,7 @@ onMounted(() => {
         var min = parseInt(props.min);
         var max = parseInt(props.max);
 
-        bindingKey.value = Math.max(min, Math.min(max, value));
+        window[builderId][state.id] = Math.max(min, Math.min(max, value));
     });
 });
 
