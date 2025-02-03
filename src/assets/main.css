@@ -1,10 +1,12 @@
 @import './base.css';
 @import 'bootstrap';
+@import 'style';
 :root {
     --main-color: #299f69;
     --hover-color: #89deb7;
-    --background-color: #42b983;
+    --background-color: #42b9aa;
     --background-hover: #9ca3af0d;
+    --button-hover: #03ad60;
     --opacity: .65;
     --main-color-aplha : #bceef2;
     --input-color: #2c3e50;
@@ -49,26 +51,21 @@ textarea.form-control {
     left: 0;
 }
 .form-control.mendatory{
-    border-left: 3px solid #ff0000;
+    border-left: 2px solid #ff0000;
 }
 .form-control.mendatory-not-valid {
-    border: 3px solid #ff0000;
+    border: 2px solid #ff0000;
 }
-.validation-error-message > span {
-    margin: 0px 12px;
-    color: red;
-    font-weight: 500;
+.form-button {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #fff;
+    transition: .3s ease-in-out;
 }
-#toaster-error {
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    display: none;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 20px;
-    z-index: 9999;
+.form-button:hover {
+    background-color: var(--button-hover) !important;
 }

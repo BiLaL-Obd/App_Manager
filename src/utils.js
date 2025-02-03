@@ -98,7 +98,7 @@ $this.capitalizeStr = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 $this.tryEval = (scr) => {
-    try { return eval(scr); } catch(e) {};
+    try { return eval(scr); } catch(e) { return false};
 }
 $this.readVal = (defaultValue, isRequired, type = String) => {
     if(!isFunction(type) && !isObject(type)) throw "type of readVal must be a String or type of object like [String, Number]";
