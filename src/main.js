@@ -19,13 +19,32 @@ import { TextField, NumberField, TextAreaField, ToolbarButton } from './componen
 const app = createApp(App)
 // app.config.globalProperties.$utils = utils;
 // window.$utils = utils;
-app.use(router)
-.component("BuilderManager", Builder)
-.component("TextInput", TextField)
-.component("TextAreaInput", TextAreaField)
-.component("NumberInput", NumberField)
-.component("ButtonInput", ToolbarButton)
-.component("fa", FontAwesomeIcon)
+
+// const components = [
+//     { name: 'BuilderManager', component: Builder },
+//     { name: 'TextInput', component: TextField },
+//     { name: 'TextAreaInput', component: TextAreaField },
+//     { name: 'NumberInput', component: NumberField },
+//     { name: 'ButtonInput', component: ToolbarButton },
+// ];
+
+// // Register components
+// components.forEach(({ name, component }) => {
+//     app.component(name, component);
+// });
+const components = new Map([
+    ['BuilderManager', Builder],
+    ['TextInput', TextField],
+    ['TextAreaInput', TextAreaField],
+    ['NumberInput', NumberField],
+    ['ButtonInput', ToolbarButton],
+]);
+components.forEach((component, name) => {
+    app.component(name, component);
+});
+
+app.component("fa", FontAwesomeIcon)
 .component('fa-layer', FontAwesomeLayers)
 .component('fa-text', FontAwesomeLayersText)
-.mount('#app')
+
+app.use(router).mount('#app');
