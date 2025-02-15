@@ -13,12 +13,18 @@ library.add(fas, fab, far);
 
 import './utils.js'
 import './manager.js'
+import { Builder } from './components/controllers/manager'
+import { TextField, NumberField, TextAreaField, ToolbarButton } from './components/controllers'
 
-// const app = createApp(App)
+const app = createApp(App)
 // app.config.globalProperties.$utils = utils;
 // window.$utils = utils;
-createApp(App)
-.use(router)
+app.use(router)
+.component("BuilderManager", Builder)
+.component("TextInput", TextField)
+.component("TextAreaInput", TextAreaField)
+.component("NumberInput", NumberField)
+.component("ButtonInput", ToolbarButton)
 .component("fa", FontAwesomeIcon)
 .component('fa-layer', FontAwesomeLayers)
 .component('fa-text', FontAwesomeLayersText)
