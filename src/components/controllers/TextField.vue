@@ -1,5 +1,5 @@
 <template>
-    <div class="row form-group">
+    <component :is="fieldTag" class="row form-group">
         <label class="form-label" :style="labelVisibility">{{ state.label }}</label>
         <div class="col-12">
             <div class="input-container" style="position:relative;">
@@ -11,7 +11,7 @@
         <div class="col-12 validation-error-message" v-show="!state.isValid">
             <span>{{ state.validation }}</span>
         </div>
-    </div>
+    </component>
 </template>
 <script setup> 
 import { reactive, onMounted, onUnmounted, watch, computed } from 'vue';
@@ -31,6 +31,7 @@ var props = defineProps({
     validation: readVal("This field is required"),
     isValid: readBool(true),
     hasStar: readBool(false),
+    fieldTag: readVal("TextField"),
 });
 var state = reactive({ ...props });
 var labelVisibility = !state.hasLabel ? "visibility: hidden;" : "";
@@ -76,7 +77,9 @@ var functions = reduceFunctions(functionDefinitions);
 var updateFieldRegistration = () => {
     if(!isEmptyOrNull(state.defaultValue))
         state.isValid = true;
-    state.defaultValue = window[builderId][state.id];
+   if (state.defaultValue !== window[builderId][state.id]) {
+        state.defaultValue = window[builderId][state.id]; 
+    }
     var plainProps = reduceProps(props, state);
     registerField(props.id, { ...plainProps, ...functions });
     getBuilderFields(builderId, [props.id]);

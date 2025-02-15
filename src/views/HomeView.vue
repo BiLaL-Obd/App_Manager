@@ -3,12 +3,12 @@
       <TextField id="test" :hasLabel="false" label="Testing Field" hasStar validation="this is required" :isValid="isValid.test"/>
       <NumberField id="test2" label="Testing Field 2" max="2" hasStar validation="this is required" :isValid="isValid.test2"/>
       <TextAreaField id="test3" label="Testing Field 2"/>
-      <Button icon="fab youtube" id="test4" text="Click" :onclick="validateAllFields" />
+      <ToolbarButton icon="fab youtube" id="test4" text="Click" :onclick="validateAllFields" />
   </Builder>
 </template>
 <script setup>
 import Builder from '../components/controllers/manager/Builder.vue';
-import { TextField, NumberField, TextAreaField, Button } from '../components/controllers';
+import { TextField, NumberField, TextAreaField, ToolbarButton } from '../components/controllers';
 import { reactive } from 'vue';
 
 var fieldIds = ['test', 'test2'];

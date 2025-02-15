@@ -1,8 +1,10 @@
 <template>
-    <a :id="id" href="javascript:void(0)" :onclick="onclick" class="form-button" :class="_class" :style="{ 'background-color': color }">
-        <fa class="icon" v-if="btnIcon.length" :icon="btnIcon" />
-        {{ state.text }}
-    </a>
+    <component :is="fieldTag">
+        <a v-show="showInput" :id="id" href="javascript:void(0)" :onclick="onclick" class="form-button" :class="_class" :style="{ 'background-color': color }">
+            <fa class="icon" v-if="btnIcon.length" :icon="btnIcon" />
+            {{ state.text }}
+        </a>
+    </component>
 </template>
 <script setup>
 import { reactive, onMounted, onUnmounted, computed } from 'vue';
@@ -13,11 +15,14 @@ var props = defineProps({
     color: readVal("#42b983"),
     _class: readVal(""),
     icon: readVal(""),
+    fieldTag: readVal("ToolbarButton"),
+    visibility: readVal("false")
 })
 var state = reactive({ ...props });
 var plainProps = reduceProps(props, state);
 var btnIcon = computed(() => { return getIcon(state.icon); });
 var builderId = {};
+var showInput = computed(() => { return state.visibility });
 
 var updateFieldRegistration = () => {
     var plainProps = reduceProps(props, state);

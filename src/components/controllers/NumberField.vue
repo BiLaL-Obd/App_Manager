@@ -1,5 +1,5 @@
 <template>
-    <TextField type="number" :id="id" :label="label" :value="defaultValue" :max="max" :min="min" :hasStar="hasStar"
+    <TextField type="number" :fieldTag="fieldTag" :id="id" :label="label" :value="defaultValue" :max="max" :min="min" :hasStar="hasStar"
     :hasLabel="hasLabel" :placeholder="placeholder" :validation="validation" :isValid="isValid"/>
 </template>
 <script setup>
@@ -19,6 +19,7 @@ var props = defineProps({
     validation: readVal("This field is required"),
     isValid: readBool(true),
     hasStar: readBool(false),
+    fieldTag: readVal("NumberField"),
 });
 var state = reactive({ ...props });
 var plainProps = reduceProps(props, state);
