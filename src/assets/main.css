@@ -27,7 +27,7 @@
     border: 1px solid var(--border-color);
     height: 45px;
     border-radius: 4px;
-    padding: 6px 20px;
+    padding: 0px 20px 0px 8px;
     outline: none;
 }
 textarea.form-control {

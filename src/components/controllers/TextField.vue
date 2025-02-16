@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="input-container" style="position:relative;">
                 <input :id="id" :type="type" v-model="inputValue" autocomplete="off" class="form-control" :class="{ 'mendatory': (state.hasStar || state.required), 'mendatory-not-valid': !state.isValid }" 
-                :maxlength="state.maxlength" :max="state.max" :min="state.min" :placeholder="state.placeholder" :required="state.required">
+                :maxlength="state.maxlength" :minlength="minlength" :placeholder="state.placeholder" :required="state.required">
                 <span class="input-border" v-show="state.isValid"></span>
             </div>
         </div>
@@ -23,8 +23,7 @@ var props = defineProps({
     label: readVal(""),
     hasLabel: readBool(true),
     defaultValue : readVal("", false, [String, Number]),
-    max: readVal("999999999999999"),
-    min: readVal("0"),
+    minlength: readVal("0"),
     maxlength: readVal("999"),
     placeholder : readVal(""),
     required: readBool(false),
@@ -47,12 +46,6 @@ var functionDefinitions = {
     setLabel: (label) => {
         if (isEmpty(label)) return "";
         updateState('label', label);
-    },
-    setMax: (value) => {
-        if (value >= state.min) updateState('max', value);
-    },
-    setMin: (value) => {
-        if (value <= state.max) updateState('min', value);
     },
     setPlaceholder: (text) => {
         updateState('placeholder', text);
@@ -96,7 +89,7 @@ var inputValue = computed({
 
 watch(props, (newProps) => {
     Object.assign(state, newProps);
-});
+}, {immediate: true});
 
 watch(state, () => {
     updateFieldRegistration();
